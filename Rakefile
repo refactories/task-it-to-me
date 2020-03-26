@@ -1,15 +1,14 @@
-require 'rake/testtask'
-require 'rubygems'
+require "rake/testtask"
+require "rubygems"
 
 Rake::TestTask.new do |t|
-  t.libs.push 'test'
-  t.pattern = 'test/**/*_test.rb'
+  t.libs.push "test"
+  t.pattern = "test/**/*_test.rb"
 end
 
-desc 'Generates a coverage report'
+desc "Generates a coverage report"
 task :coverage do
-  ENV['COVERAGE'] = 'true'
-  Rake::Task['test'].execute
+  `COVERAGE=true bundle exec rspec`
 end
 
 desc 'Generate reek report in "metrics/reek.txt"'
@@ -24,26 +23,25 @@ end
 
 desc 'Generate rubycritic report "metrics/flog.txt"'
 task :rubycritic do
-  `rubycritic lib --path=metrics/rubycritic`
+  `rubycritic lib --path=metrics`
 end
 
-task :default => [:coverage, :rubycritic]
+task default: [:coverage, :rubycritic]
 
 # ----------
 
-desc 'Open coverage and critic reports'
+desc "Open coverage and critic reports"
 task :view_metrics do
-  `open metrics/coverage/index.html`
-  `open metrics/rubycritic/overview.html`
+  `open coverage/index.html`
+  `open metrics/overview.html`
 end
 
-desc 'Open coverage report (OSX only)'
+desc "Open coverage report (OSX only)"
 task :view_coverage do
-  `open metrics/coverage/index.html`
+  `open coverage/index.html`
 end
 
-desc 'Open rubycritic report (OSX only)'
+desc "Open rubycritic report (OSX only)"
 task :view_rubycritic do
-  `open metrics/rubycritic/overview.html`
+  `open metrics/overview.html`
 end
-

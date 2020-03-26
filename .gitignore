@@ -1,4 +1,3 @@
-stories.md
-instructions
-tmp
-metrics/rubycritic/snapshots
+metrics
+coverage
+spec/examples.txt

@@ -18,16 +18,16 @@ class App
 
     command = @input_stream.gets.chomp
 
-    while command != 'q'
+    while command != "q"
       if !@current_project
         case command
-        when 'a'
+        when "a"
           @projects = [] if @projects.nil?
           @output_stream.puts("\e[0;3mEnter a project name:\e[0m")
           name = @input_stream.gets.chomp
           @projects << {name => []}
           @output_stream.puts("\e[38;5;40mCreated project:\e[0m '#{name}'\n\n")
-        when 'ls'
+        when "ls"
           @output_stream.puts("\e[38;5;40mListing projects:\e[0m\n")
           if !@projects.nil? && !@projects.empty?
             @projects.each do |project|
@@ -37,11 +37,11 @@ class App
           else
             @output_stream.puts("\e[40;38;5;214mNo projects created\e[0m\n\n")
           end
-        when 'd'
-          if @projects and @projects.size > 0
+        when "d"
+          if @projects && (@projects.size > 0)
             @output_stream.puts("\e[0;35mEnter a project name:\e[0m")
             project_name = @input_stream.gets
-            @deleted = @projects.delete_if {|project| project.keys.first == project_name.strip }.empty?
+            @deleted = @projects.delete_if { |project| project.keys.first == project_name.strip }.empty?
             if @deleted
               @output_stream.puts "\e[38;5;40mDeleting project:\e[0m '#{project_name.strip}'\n\n"
             else
@@ -54,7 +54,7 @@ class App
             @output_stream.puts("\e[40;38;5;214mNo projects created\e[0m\n\n")
           end
           @deleted = nil
-        when 'e'
+        when "e"
           if !@projects || @projects.size == 0
             @output_stream.puts("\e[40;38;5;214mCan't edit any projects\e[0m")
             @output_stream.puts("\e[40;38;5;214mNo projects created\e[0m\n\n")
@@ -63,7 +63,7 @@ class App
 
           @output_stream.puts("\e[0;35mEnter a project name:\e[0m")
           name = @input_stream.gets.chomp
-          if @current_project = @projects.detect{|p| p.keys.first == name}
+          if (@current_project = @projects.detect { |p| p.keys.first == name })
             @output_stream.puts("\e[38;5;40mEditing project: '#{name}'\n\n")
             @output_stream.puts("\e[0;37mEDIT PROJECT MENU\e[0m")
             @output_stream.puts("-----------------------------")
@@ -85,24 +85,24 @@ class App
         end
       else
         case command
-        when 'a'
+        when "a"
           @output_stream.puts("\e[0;35mEnter a task name:\e[0m")
           task_name = @input_stream.gets.chomp
           @current_project.values.first << task_name
           @output_stream.puts("\e[38;5;40mCreated task:\e[0m '#{task_name}'\n\n")
-        when 'b'
+        when "b"
           @current_project = false
           @output_stream.puts("\n\n")
-        when 'c'
+        when "c"
           @output_stream.puts("\e[0;35mEnter new project name:\e[0m")
           old_name = @current_project.keys.first
           new_name = @input_stream.gets.chomp
           @current_project[new_name] = @current_project.values.first
           @current_project.delete(old_name)
           @output_stream.puts("\e[38;5;40mChanged project name from\e[0m '#{old_name}' \e[38;5;40mto\e[0m '#{new_name}'\n\n")
-        when 'e'
+        when "e"
           name = @input_stream.gets.chomp
-          if index = @current_project.values.first.find_index(name)
+          if (index = @current_project.values.first.find_index(name))
             @output_stream.puts("\e[38;5;40mEditing task:\e[0m '#{name}'")
             @output_stream.puts("\e[0;35mEnter a task name:\e[0m")
             new_name = @input_stream.gets.chomp
@@ -111,7 +111,7 @@ class App
           else
             @output_stream.puts("\e[40;38;5;214mTask doesn't exist:\e[0m '#{name}'\n\n")
           end
-        when 'd'
+        when "d"
           project_name = @current_project.keys.first
           if @current_project.values.first.empty?
             @output_stream.puts("\e[40;38;5;214mNo tasks created in '#{project_name}'\e[0m\n\n")
@@ -124,7 +124,7 @@ class App
               @output_stream.puts("\e[40;38;5;214mTask doesn't exist:\e[0m '#{task_name.strip}'\n\n")
             end
           end
-        when 'f'
+        when "f"
           project_name = @current_project.keys.first
           if @current_project.values.first.empty?
             @output_stream.puts("\e[40;38;5;214mNo tasks created in '#{project_name}'\e[0m\n\n")
@@ -137,7 +137,7 @@ class App
               @output_stream.puts("\e[40;38;5;214mTask doesn't exist:\e[0m '#{task_name.strip}'\n\n")
             end
           end
-        when 'ls'
+        when "ls"
           if @current_project.values.first.empty?
             @output_stream.puts("\e[40;38;5;214mNo tasks created in \e[0m'#{@current_project.keys.first}'\n\n")
           else

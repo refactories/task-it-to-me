@@ -1,12 +1,9 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-group :test do
-  gem 'rake', "10.4.2"
-
-  gem 'minitest'
-  gem 'mocha'
-  gem 'm'
-
-  gem 'simplecov'
-  gem 'rubycritic'
+group :development, :test do
+  gem "simplecov"
+  gem "rubycritic"
+  gem "standard"
+  gem "rake"
+  gem "rspec"
 end
