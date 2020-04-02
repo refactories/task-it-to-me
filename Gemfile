@@ -1,9 +1,10 @@
 source "https://rubygems.org"
 
 group :development, :test do
-  gem "simplecov"
-  gem "rubycritic"
-  gem "standard"
+  gem "pry-byebug"
   gem "rake"
   gem "rspec"
+  gem "rubycritic"
+  gem "simplecov"
+  gem "standard"
 end
