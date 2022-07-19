@@ -1,10 +1,11 @@
-require_relative "../lib/app"
+require "simplecov"
 require_relative "./support/app_helpers"
 
-if ENV["COVERAGE"]
-  require "simplecov"
-  SimpleCov.start
+SimpleCov.start do
+  add_filter "/spec/"
 end
+
+require_relative "../lib/app"
 
 RSpec.configure do |config|
   config.include AppHelpers

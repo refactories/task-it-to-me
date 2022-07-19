@@ -3,3 +3,4 @@ coverage
 spec/examples.txt
 
 .vscode
+**/*.DS_Store
