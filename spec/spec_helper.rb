@@ -2,6 +2,7 @@ require "simplecov"
 require_relative "./support/app_helpers"
 
 SimpleCov.start do
+  # enable_coverage :branch
   add_filter "/spec/"
 end
 
